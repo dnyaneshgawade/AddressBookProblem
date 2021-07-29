@@ -59,12 +59,26 @@ namespace AddressBookProject
                     Console.WriteLine("contact not found");
             }
         }
+        public void Delete()
+        {
+            Console.WriteLine("Enter the first name :");
+            String firstname = Console.ReadLine();
+            foreach (var data in Contacts)
+            {
+
+                if (data.FirstName.Equals(firstname))
+                {
+                    Contacts.Remove(data);
+                    Console.WriteLine("contact deleted successfully");
+                }
+            }
+        }
         public void ContactsDetails()
         {
             int Choice = 0;
-            while (Choice != 3)
+            while (Choice != 4)
             {
-                Console.WriteLine(" Enter 0 for Add new contact\n Enter 1 for Edit Existing contact\n Enter 2 for Display Contact\n 3 for exit ");
+                Console.WriteLine(" Enter 0 for Add new contact\n Enter 1 for Edit Existing contact\n Enter 2 for Display Contact\n Enter  3 for delete \n Enter 4 for exit ");
                 Choice = Convert.ToInt32(Console.ReadLine());
                 switch (Choice)
                 {
@@ -83,6 +97,9 @@ namespace AddressBookProject
                         {
                             Display(person);
                         }
+                        break;
+                    case 3:
+                        Delete();
                         break;
                     default:
                         Console.WriteLine("Enter wrong input");
