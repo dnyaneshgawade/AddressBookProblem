@@ -7,7 +7,7 @@ namespace AddressBookProject
         static void Main(string[] args)
         {
             Address address = new Address();
-            address.Add();
+            address.ContactsDetails();
         }
     }
 }
