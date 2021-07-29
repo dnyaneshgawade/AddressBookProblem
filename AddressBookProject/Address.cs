@@ -6,6 +6,7 @@ namespace AddressBookProject
 {
     class Address
     {
+        public static List<AddressBook> Contacts = new List<AddressBook>();
         public void Add()
         {
             AddressBook addressbook = new AddressBook();
@@ -18,6 +19,7 @@ namespace AddressBookProject
             addressbook.Zip = Convert.ToDouble(Console.ReadLine());
             addressbook.PhoneNumber = Convert.ToDouble(Console.ReadLine());
             addressbook.Email = Console.ReadLine();
+            Contacts.Add(addressbook);
         }
     }
 }
