@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace AddressBookProject
@@ -7,7 +8,7 @@ namespace AddressBookProject
     class Address
     {
         public static int Choice;
-        //public static List<AddressBook> Contacts = new List<AddressBook>();
+        public static List<AddressBook> Contacts = new List<AddressBook>();
         public static Dictionary<string, List<AddressBook>> dict = new Dictionary<string, List<AddressBook>>();
         public void Add(Dictionary<string, List<AddressBook>> dict)
         {
@@ -16,16 +17,14 @@ namespace AddressBookProject
             for (int i = 0; i < num; i++)
             {
                 List<AddressBook> Contacts = new List<AddressBook>();
+                List<AddressBook> lambda = new List<AddressBook>();
                 AddressBook addressBook = new AddressBook();
                 Console.WriteLine("Enter First Name");
                 addressBook.FirstName = Console.ReadLine();
-                if (dict.ContainsKey(addressBook.FirstName))
-                {
-                    Console.WriteLine("Person Already Exists!!! Please Enter Different Name");
-                    i -= 1;
-                }
-                else
-                {
+                
+                var address = dict.Any(x => x.Key.Equals(addressBook.FirstName));
+                if (address== false)
+                { 
                     Console.WriteLine("Enter Last Name");
                     addressBook.LastName = Console.ReadLine();
                     Console.WriteLine("Enter address");
@@ -43,6 +42,11 @@ namespace AddressBookProject
                     Console.WriteLine("Person added successully...");
                     Contacts.Add(addressBook);
                     dict.Add(addressBook.FirstName, Contacts);
+                }
+                else
+                {
+                    Console.WriteLine("Person Already Exists!!! Please Enter Different Name ");
+                    i -= 1;
                 }
             }
         }
