@@ -128,6 +128,7 @@ namespace AddressBookProject
                         Display(dict);
                         break;
                     case 3:
+                        
                         SortUsingCityOrState(dict);
                         break;
                     default:
@@ -194,7 +195,7 @@ namespace AddressBookProject
             }
             else
             {
-                Console.WriteLine("Addressbook is Empty");
+                Console.WriteLine("Addressbook is Empty. try again...");
             }
         }
     }
