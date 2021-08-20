@@ -194,7 +194,7 @@ namespace AddressBookProject
             }
             else
             {
-                Console.WriteLine("Record is empty................");
+                Console.WriteLine("AddressBook is Empty... Try Again...");
             }
         }
     }
