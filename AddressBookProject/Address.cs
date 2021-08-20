@@ -112,9 +112,9 @@ namespace AddressBookProject
         public void ContactsDetails()
         {
 
-            while (Choice != 3)
+            while (Choice != 4)
             {
-                Console.WriteLine(" Enter 0 for Add new contact\n Enter 1 for Edit Existing contact\n Enter 2 for Display all contacts\nEnter 3 for exit ");
+                Console.WriteLine(" Enter 0 for Add new contact\n Enter 1 for Edit Existing contact\n Enter 2 for Display all contacts\nEnter 3 for sort by state or city \n Enter 4 for exit ");
                 Choice = Convert.ToInt32(Console.ReadLine());
                 switch (Choice)
                 {
@@ -127,10 +127,74 @@ namespace AddressBookProject
                     case 2:
                         Display(dict);
                         break;
+                    case 3:
+                        SortUsingCityOrState(dict);
+                        break;
                     default:
                         Console.WriteLine("Enter wrong input");
                         break;
                 }
+            }
+        }
+        public void SortUsingCityOrState(Dictionary<string, List<AddressBook>> dict)
+        {
+            if (dict.Count > 0)
+            {
+                Console.WriteLine("Enter City or State");
+                List<AddressBook> sort = new List<AddressBook>();
+                string search = Console.ReadLine().ToLower();
+                switch (search)
+                {
+                    case "city":
+                        Console.WriteLine("Enter City Name :");
+                        string city = Console.ReadLine();
+                        foreach (KeyValuePair<string, List<AddressBook>> peoples in dict)
+                        {
+                            sort = peoples.Value;
+                        }
+                        var check = sort.Any(x => x.City.Equals(city));
+                        if (check)
+                        {
+                            var result = sort.Where(x => x.City.Contains(city));
+                            foreach (var item in result)
+                            {
+                                Console.WriteLine("\nFirstname : "+item.FirstName+"\tCity : "+item.City);
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("City not Found!");
+                        }
+                        break;
+                    case "state":
+                        Console.WriteLine("Enter City Name :");
+                        string state = Console.ReadLine();
+                        foreach (KeyValuePair<string, List<AddressBook>> peoples in dict)
+                        {
+                            sort = peoples.Value;
+                        }
+                        var checks = sort.Any(x => x.City.Equals(state));
+                        if (checks)
+                        {
+                            var result = sort.Where(x => x.City.Contains(state));
+                            foreach (var item in result)
+                            {
+                                Console.WriteLine("\nFirstname : " + item.FirstName + "\tState : " + item.State);
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("State not Found!");
+                        }
+                        break;
+                    default:
+                        Console.WriteLine("try again");
+                        break;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Record is empty................");
             }
         }
     }
