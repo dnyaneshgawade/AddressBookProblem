@@ -139,6 +139,7 @@ namespace AddressBookProject
         }
         public void SortUsingCityOrState(Dictionary<string, List<AddressBook>> dict)
         {
+            int number=0;
             if (dict.Count > 0)
             {
                 Console.WriteLine("Enter City or State");
@@ -160,7 +161,9 @@ namespace AddressBookProject
                             foreach (var item in result)
                             {
                                 Console.WriteLine("\nFirstname : "+item.FirstName+"\tCity : "+item.City);
+                                number += 1;
                             }
+                            Console.WriteLine("Number of City's present in Addressbook: "+number);
                         }
                         else
                         {
@@ -181,7 +184,9 @@ namespace AddressBookProject
                             foreach (var item in result)
                             {
                                 Console.WriteLine("\nFirstname : " + item.FirstName + "\tState : " + item.State);
+                                number += 1;
                             }
+                            Console.WriteLine("Number of States present in Addressbook: "+number);
                         }
                         else
                         {
