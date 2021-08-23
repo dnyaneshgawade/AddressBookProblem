@@ -257,7 +257,7 @@ namespace AddressBookProject
 
             while (Choice != 10)
             {
-                Console.WriteLine(" Enter 0 for Add new contact\n Enter 1 for Edit Existing contact\n Enter 2 for Display all contacts\n Enter 3 for sort by state or city \n Enter 4 for Sort Using City or State\n Enter 5 for Display number of contacts present in Addressbook \n Enter 6 for sort whole dictionary \n Enter 7 For Sort by city, state or zip \n Enter 10 for exit ");
+                Console.WriteLine(" Enter 0 for Add new contact\n Enter 1 for Edit Existing contact\n Enter 2 for Display all contacts\n Enter 3 for sort by state or city \n Enter 4 for Sort Using City or State\n Enter 5 for Display number of contacts present in Addressbook \n Enter 6 for sort whole dictionary \n Enter 7 For Sort by city, state or zip \n Enter 8 for write contacts to file \n Enter 9 for Read contacts from file\n Enter 10 for exit ");
                 Choice = Convert.ToInt32(Console.ReadLine());
                 switch (Choice)
                 {
@@ -286,6 +286,13 @@ namespace AddressBookProject
                         break;
                     case 7:
                         SortByCityStateOrZip(dict);
+                        break;
+                    case 8:
+                        FileIO.WriteToFile(dict, FileIO.filepath);
+                        break;
+                    case 9:
+                        FileIO fileIO = new FileIO();
+                        fileIO.ReadFile(FileIO.filepath);
                         break;
                     default:
                         Console.WriteLine("Enter wrong input");
