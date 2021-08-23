@@ -5,8 +5,17 @@ using System.Text;
 
 namespace AddressBookProject
 {
-    class Address
+    class AddressBookMain
     {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Address { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public double Zip { get; set; }
+        public double PhoneNumber { get; set; }
+        public string Email { get; set; }
+        
         public static int ContactCount=0;
         public static int Choice;
         public static List<AddressBook> Contacts = new List<AddressBook>();
@@ -110,44 +119,7 @@ namespace AddressBookProject
             }
 
         }
-        public void ContactsDetails()
-        {
-
-            while (Choice != 7)
-            {
-                Console.WriteLine(" Enter 0 for Add new contact\n Enter 1 for Edit Existing contact\n Enter 2 for Display all contacts\n Enter 3 for sort by state or city \n Enter 4 for Sort Using City or State\n Enter 5 for Display number of contacts present in Addressbook \n Enter 6 for sort whole dictionary \n Enter 7 for exit ");
-                Choice = Convert.ToInt32(Console.ReadLine());
-                switch (Choice)
-                {
-                    case 0:
-                        Add(dict);
-                        break;
-                    case 1:
-                        Edit(dict);
-                        break;
-                    case 2:
-                        Display(dict);
-                        break;
-                    case 3:
-                        Edit(dict);
-                        break;
-                    case 4:
-                        SortUsingCityOrState(dict);
-                        break;
-                    case 5:
-                        Display(dict);
-                        Console.WriteLine("Contacts present in the AddressBook is: "+ContactCount"\n");
-                        break;
-
-                    case 6:
-                        SortDictionary(dict);
-                        break;
-                    default:
-                        Console.WriteLine("Enter wrong input");
-                        break;
-                }
-            }
-        }
+        
         public void SortUsingCityOrState(Dictionary<string, List<AddressBook>> dict)
         {
             int number=0;
@@ -230,6 +202,96 @@ namespace AddressBookProject
                 Console.WriteLine("Addressbook is Empty. try again...");
             }
         }
-        
-}
+        public override string ToString()
+        {
+            return " First Name : " + this.FirstName + " \n Last Name : " + this.LastName + " \n Address : " + this.Address + "\n City : " + this.City + "\n State : " + this.State + "\n Zip : " + this.Zip + "\n PhoneNumber : " + this.PhoneNumber + "\n Email : " + this.Email;
+        }
+
+        public static void SortByCityStateOrZip(Dictionary<string, List<AddressBook>> dict)
+        {
+            
+            List<AddressBook> list = new List<AddressBook>();
+            foreach (var data in dict)
+            {
+                foreach (var item in data.Value)
+                {
+                    list.Add(item);
+                }
+            }
+            while (Choice != 4)
+            {
+                Console.WriteLine("\n 1. for sort based on city \n 2. for sort based on State \n 3. for sort based on zip \n 4. for Exit \n Enter Your Cchoice ");
+                Choice = Convert.ToInt16(Console.ReadLine());
+                switch (Choice)
+                {
+                    case 1:
+                        Console.WriteLine("\nDisplaying the list after sorting the citywise ");
+                        foreach (var item in list.OrderBy(x => x.State))
+                        {
+                            Console.WriteLine(list.ToString());
+                        }
+                        break;
+                    case 2:
+                        Console.WriteLine("\nDisplaying the list after sorting the Statewise");
+                        foreach (var item in list.OrderBy(x => x.Zip))
+                        {
+                            Console.WriteLine(list.ToString());
+                        }
+                        break;
+                    case 3:
+                        Console.WriteLine("\nDisplaying the list after sorting the ZipCodewise ");
+                        foreach (var item in list.OrderBy(x => x.City))
+                        {
+                            Console.WriteLine(list.ToString());
+                        }
+                        break;
+                    default:
+                        Console.WriteLine("You Enter Wrong Input.. Try Again...");
+                        break;
+                }
+            }
+        }
+
+        public void ContactsDetails()
+        {
+
+            while (Choice != 10)
+            {
+                Console.WriteLine(" Enter 0 for Add new contact\n Enter 1 for Edit Existing contact\n Enter 2 for Display all contacts\n Enter 3 for sort by state or city \n Enter 4 for Sort Using City or State\n Enter 5 for Display number of contacts present in Addressbook \n Enter 6 for sort whole dictionary \n Enter 7 For Sort by city, state or zip \n Enter 10 for exit ");
+                Choice = Convert.ToInt32(Console.ReadLine());
+                switch (Choice)
+                {
+                    case 0:
+                        Add(dict);
+                        break;
+                    case 1:
+                        Edit(dict);
+                        break;
+                    case 2:
+                        Display(dict);
+                        break;
+                    case 3:
+                        Edit(dict);
+                        break;
+                    case 4:
+                        SortUsingCityOrState(dict);
+                        break;
+                    case 5:
+                        Display(dict);
+                        Console.WriteLine("Contacts present in the AddressBook is: " + ContactCount + "\n");
+                        break;
+
+                    case 6:
+                        SortDictionary(dict);
+                        break;
+                    case 7:
+                        SortByCityStateOrZip(dict);
+                        break;
+                    default:
+                        Console.WriteLine("Enter wrong input");
+                        break;
+                }
+            }
+        }
+    }
 }
