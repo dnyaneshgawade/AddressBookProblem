@@ -7,6 +7,7 @@ namespace AddressBookProject
 {
     class Address
     {
+        public static int ContactCount=0;
         public static int Choice;
         public static List<AddressBook> Contacts = new List<AddressBook>();
         public static Dictionary<string, List<AddressBook>> dict = new Dictionary<string, List<AddressBook>>();
@@ -52,7 +53,7 @@ namespace AddressBookProject
         }
         public void Display(Dictionary<string, List<AddressBook>> dict)
         {
-            int count = 1;
+            
             if ((dict.Count) > 0)
             {
                 foreach (KeyValuePair<string, List<AddressBook>> kvp in dict)
@@ -70,7 +71,7 @@ namespace AddressBookProject
                         Console.WriteLine("Phone Number :" + contacts.PhoneNumber);
                         Console.WriteLine("Email :" + contacts.Email);
                         Console.WriteLine();
-                        count++;
+                        ContactCount++;
                     }
                 }
 
@@ -112,9 +113,9 @@ namespace AddressBookProject
         public void ContactsDetails()
         {
 
-            while (Choice != 4)
+            while (Choice != 7)
             {
-                Console.WriteLine(" Enter 0 for Add new contact\n Enter 1 for Edit Existing contact\n Enter 2 for Display all contacts\nEnter 3 for sort by state or city \n Enter 4 for exit ");
+                Console.WriteLine(" Enter 0 for Add new contact\n Enter 1 for Edit Existing contact\n Enter 2 for Display all contacts\n Enter 3 for sort by state or city \n Enter 4 for Sort Using City or State\n Enter 5 for Display number of contacts present in Addressbook \n Enter 6 for sort whole dictionary \n Enter 7 for exit ");
                 Choice = Convert.ToInt32(Console.ReadLine());
                 switch (Choice)
                 {
@@ -128,8 +129,18 @@ namespace AddressBookProject
                         Display(dict);
                         break;
                     case 3:
-                        
+                        Edit(dict);
+                        break;
+                    case 4:
                         SortUsingCityOrState(dict);
+                        break;
+                    case 5:
+                        Display(dict);
+                        Console.WriteLine("Contacts present in the AddressBook is: "+ContactCount"\n");
+                        break;
+
+                    case 6:
+                        SortDictionary(dict);
                         break;
                     default:
                         Console.WriteLine("Enter wrong input");
@@ -186,7 +197,7 @@ namespace AddressBookProject
                                 Console.WriteLine("\nFirstname : " + item.FirstName + "\tState : " + item.State);
                                 number += 1;
                             }
-                            Console.WriteLine("Number of States present in Addressbook: "+number);
+                            Console.WriteLine("Number of States present in Addressbook: " + number);
                         }
                         else
                         {
@@ -203,5 +214,22 @@ namespace AddressBookProject
                 Console.WriteLine("Addressbook is Empty. try again...");
             }
         }
-    }
+
+        public void SortDictionary(Dictionary<string, List<AddressBook>> dict)
+        {
+            if (dict.Count > 0)
+            {
+                Console.WriteLine("Addressbook Afer Sorting: ");
+                foreach (var data in dict.OrderBy(x => x.Key))
+                {
+                    Console.WriteLine("{0}", data.Key);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Addressbook is Empty. try again...");
+            }
+        }
+        
+}
 }
